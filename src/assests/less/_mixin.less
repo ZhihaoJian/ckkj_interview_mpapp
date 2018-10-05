@@ -1,0 +1,14 @@
+@import './_variable.less';
+//修正 Title组件和at-article-h1组合使用时候的样式偏移
+.fix-article-title() {
+    .at-article {
+        .at-article__h1 {
+            margin-left: 0
+        }
+    }
+}
+
+//给底部多处一些空白
+.more-space(@size: 0px) {
+    padding-bottom: @padding-bottom + @size;
+}
