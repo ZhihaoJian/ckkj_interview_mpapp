@@ -2,7 +2,7 @@
 	"miniprogramRoot": "./dist",
 	"projectname": "ckkj_interview",
 	"description": "创客103网申小程序",
-	"appid": "wxd7d4718da1a78a57",
+	"appid": "touch_your_appid",
 	"setting": {
 		"urlCheck": true,
 		"es6": false,

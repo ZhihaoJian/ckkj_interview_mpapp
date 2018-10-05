@@ -13,7 +13,7 @@
     "dev:rn": "npm run build:rn -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Zhihao Jian",
   "license": "MIT",
   "dependencies": {
     "@tarojs/components": "^1.0.7",
