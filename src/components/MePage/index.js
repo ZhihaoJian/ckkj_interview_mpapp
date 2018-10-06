@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
-import { Picker, View, Text, Textarea } from '@tarojs/components'
+import { Picker, View, Text } from '@tarojs/components'
 import { AtInput, AtTextarea, AtButton, AtRadio, AtToast } from 'taro-ui'
-import { getStorage, setStorage, hasNetWork, connectToDB } from '../../util/index'
+import { getStorage, setStorage, hasNetWork, connectToDB, isExpired } from '../../util/index'
 import './index.less'
 import Title from '../Title';
 import NoticeBar from '../Notice';
@@ -117,7 +117,7 @@ export default class MePage extends Component {
     }
 
     componentDidMount() {
-        if (this.isExpired()) {
+        if (isExpired()) {
             this.setState({ disabled: true })
         } else {
             //获取历史简历信息，回填
@@ -132,13 +132,6 @@ export default class MePage extends Component {
                 this.setState({ ...obj })
             })
         }
-    }
-
-    //判断当前日期是否超过2018.10.10 中午12 点，过期的话，禁止提交简历
-    isExpired = () => {
-        const date = new Date();
-        const expire = new Date(2018, 10, 10, 12);
-        return date > expire;
     }
 
     //下面是各种表单绑定
@@ -245,7 +238,10 @@ export default class MePage extends Component {
         return (
             <View className='interview-wrapper' >
                 <Title title='填写个人简历' />
-                <NoticeBar />
+                {
+                    !(isExpired()) ? (<NoticeBar marquee />) : (<NoticeBar title='报名已截止，欢迎大家的关注' />)
+                }
+                
                 <View className='page' >
                     <View className='page-section' >
                         <AtInput

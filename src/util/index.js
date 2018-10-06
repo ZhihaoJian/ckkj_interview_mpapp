@@ -134,3 +134,10 @@ export const connectToDB = (data) => {
         })
     })
 }
+
+//判断是否过期
+export const isExpired = () => {
+    const date = new Date();
+    const expire = new Date(2018, 10, 10, 12);
+    return date > expire;
+}

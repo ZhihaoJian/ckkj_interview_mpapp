@@ -8,9 +8,6 @@ import Footer from '../../components/Footer';
 
 export default class Index extends Component {
 
-    config = {
-        navigationBarTitleText: '创客103网申平台'
-    }
 
     state = {
         current: 0

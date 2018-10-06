@@ -6,7 +6,7 @@ import CardList from '../CardList/index'
 import './index.less'
 import Title from '../Title';
 import NoticeBar from '../Notice';
-import { navigateTo } from '../../util';
+import { navigateTo, isExpired } from '../../util';
 import { teachers, recruitmentDirections, swiperImgs } from '../../mock/local_data';
 
 //首页
@@ -25,7 +25,9 @@ export default class IndexPage extends Component {
             <View className='index-page' >
 
                 {/* 通知 */}
-                <NoticeBar />
+                {
+                    !(isExpired()) ? (<NoticeBar marquee />) : (<NoticeBar title='报名已截止，欢迎大家的关注' />)
+                }
 
                 {/*轮播图*/}
                 <IndexSwiper imgs={swiperImgs} />
