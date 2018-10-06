@@ -75,6 +75,19 @@ function isFormValidate(data) {
     return true;
 }
 
+const pickerColumn2 = {
+    0: ['旅游管理','酒店管理'],
+    1: ['英语', '日语', '德语', '商务英语'],
+    2: ['会计学', '财务管理', '审计学'],
+    3: ['互联网金融','金融学','投资学'],
+    4: ['市场营销专业', '物流管理', '电子商务', '国际经济与贸易'],
+    5: ['软件工程', '计算机科学与技术', '信息管理与信息系统', '物联网工程', '智能科学与技术', '数据科学与大数据技术'],
+    6: [],
+    7: [],
+    8: ['视觉传达设计', '数字媒体艺术', '产品设计', '环境设计'],
+    9: ['电子商务及法律','法学']
+}
+
 //简历编写
 export default class MePage extends Component {
 
@@ -156,6 +169,18 @@ export default class MePage extends Component {
     handleMyKnowledgeChange = (e) => {
         const val = e.detail.value;
         this.setState({ myKnowledge: val })
+    }
+
+    handlePickerColumnChange = (e) => {
+        const { column, value } = e.detail; //{column: 0, value: 1}
+        if(column === 0){
+            const major = pickerColumn2[value];    //专业
+    
+            const newMajor = this.state.major;
+            newMajor[1] = major;
+    
+            this.setState({major: newMajor})
+        }
     }
 
     handleMyPlanChange = (e) => {
@@ -279,7 +304,13 @@ export default class MePage extends Component {
                     <View className='page-section p'>
                         <Text className='form-title'>专业</Text>
                         <View className='picker-wrapper' >
-                            <Picker mode='multiSelector' disabled={disabled} range={this.state.major} onChange={this.handleMajorChange}>
+                            <Picker 
+                              mode='multiSelector'
+                              disabled={disabled} 
+                              range={this.state.major} 
+                              onChange={this.handleMajorChange} 
+                              onColumnchange={this.handlePickerColumnChange} 
+                            >
                                 <View className='picker'>
                                     {this.state.majorChecked}
                                 </View>
