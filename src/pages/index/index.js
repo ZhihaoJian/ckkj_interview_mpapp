@@ -36,10 +36,10 @@ export default class Index extends Component {
                 }
                 <Footer />
                 <AtTabBar
-                    fixed
-                    tabList={tabList}
-                    current={this.state.current}
-                    onClick={this.onTabBarClick}
+                  fixed
+                  tabList={tabList}
+                  current={this.state.current}
+                  onClick={this.onTabBarClick}
                 />
             </View>
         )

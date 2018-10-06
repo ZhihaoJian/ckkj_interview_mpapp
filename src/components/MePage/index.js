@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { Picker, View, Text } from '@tarojs/components'
+import { Picker, View, Text, Textarea } from '@tarojs/components'
 import { AtInput, AtTextarea, AtButton, AtRadio, AtToast } from 'taro-ui'
 import { getStorage, setStorage, hasNetWork, connectToDB } from '../../util/index'
 import './index.less'
@@ -65,11 +65,11 @@ function setToLocalData(data, disabled) {
 //检查表单是否合法
 //合法才能提交简历
 function isFormValidate(data) {
-    const { username, phone, gender, majorChecked, directionChecked, myKnowledge, myPlan, gradeChecked, type } = data;
+    const { username, phone, myKnowledge, myPlan } = data;
     if (!username || !phone || !myKnowledge || !myPlan) {
         return false;
     }
-    if (!(/^1[3|4|5|7|8]\d{9}$/.test(phone))) {
+    if (!(/^1[3|4|5|7|6|8]\d{9}$/.test(phone))) {
         return false;
     }
     return true;
@@ -224,46 +224,46 @@ export default class MePage extends Component {
                 <View className='page' >
                     <View className='page-section' >
                         <AtInput
-                            name='username'
-                            title='姓名'
-                            type='text'
-                            disabled={disabled}
-                            placeholder='Riot'
-                            value={this.state.username}
-                            onChange={this.handleUserNameChange.bind(this)}
+                          name='username'
+                          title='姓名'
+                          type='text'
+                          disabled={disabled}
+                          placeholder='Riot'
+                          value={this.state.username}
+                          onChange={this.handleUserNameChange.bind(this)}
                         />
                     </View>
                     <View className='page-section'>
                         <AtInput
-                            name='phone'
-                            title='手机号码'
-                            type='phone'
-                            disabled={disabled}
-                            placeholder='15612343005'
-                            value={this.state.phone}
-                            onChange={this.handlePhoneChange.bind(this)}
+                          name='phone'
+                          title='手机号码'
+                          type='phone'
+                          disabled={disabled}
+                          placeholder='15612343005'
+                          value={this.state.phone}
+                          onChange={this.handlePhoneChange.bind(this)}
                         />
                     </View>
                     <View className='page-section t g' >
                         <Text className='form-title' >性别</Text>
                         <AtRadio
-                            options={[
+                          options={[
                                 { label: '男', value: '男', disabled: disabled },
                                 { label: '女', value: '女', disabled: disabled },
                             ]}
-                            value={this.state.gender}
-                            onClick={this.handleGenderChange}
+                          value={this.state.gender}
+                          onClick={this.handleGenderChange}
                         />
                     </View>
                     <View className='page-section t g' >
                         <Text className='form-title' >入驻类型</Text>
                         <AtRadio
-                            options={[
+                          options={[
                                 { label: '技术入驻', value: '技术入驻', disabled: disabled },
                                 { label: '创业入驻', value: '创业入驻', disabled: disabled },
                             ]}
-                            value={this.state.type}
-                            onClick={this.handleTypeChange}
+                          value={this.state.type}
+                          onClick={this.handleTypeChange}
                         />
                     </View>
                     <View className='page-section p'>
@@ -298,26 +298,27 @@ export default class MePage extends Component {
                     </View>
                     <View className='page-section t'>
                         <AtTextarea disabled={disabled}
-                            value={this.state.myKnowledge}
-                            onChange={this.handleMyKnowledgeChange}
-                            maxlength='200'
-                            placeholder='您现在所掌握的知识或者技能'
+                          value={this.state.myKnowledge}
+                          onChange={this.handleMyKnowledgeChange}
+                          maxlength='200'
+                          placeholder='您现在所掌握的知识或者技能'
                         />
                     </View>
                     <View className='page-section t' >
                         <AtTextarea disabled={disabled}
-                            value={this.state.myPlan}
-                            onChange={this.handleMyPlanChange}
-                            maxlength='200'
-                            placeholder='您未来的学习计划或者创业计划'
+                          value={this.state.myPlan}
+                          onChange={this.handleMyPlanChange}
+                          maxlength='200'
+                          placeholder='您未来的学习计划或者创业计划'
                         />
                     </View>
                     <View className='page-section t'>
                         <AtButton
-                            type='secondary'
-                            disabled={disabled}
-                            loading={this.state.loading}
-                            onClick={this.handleSubmit} >{disabled ? '已提交' : '提交'}</AtButton>
+                          type='secondary'
+                          disabled={disabled}
+                          loading={this.state.loading}
+                          onClick={this.handleSubmit}
+                        >{disabled ? '已提交' : '提交'}</AtButton>
                     </View>
                 </View>
 
@@ -326,11 +327,11 @@ export default class MePage extends Component {
                 {
                     this.state.errorToastShow ? (
                         <AtToast
-                            text={this.state.errorToast.title}
-                            icon='error'
-                            status='error'
-                            isOpened={this.state.errorToastShow}
-                            hasMask
+                          text={this.state.errorToast.title}
+                          icon='error'
+                          status='error'
+                          isOpened={this.state.errorToastShow}
+                          hasMask
                         />
                     ) : null
                 }
