@@ -106,3 +106,31 @@ export const navigateTo = (url, options = {}) => {
         url: newUrl
     });
 }
+
+//简历保存到云端数据库
+export const connectToDB = (data) => {
+    wx.cloud.init({ traceUser: true });
+    const db = wx.cloud.database()
+    const { username, phone, gender, type, gradeChecked, majorChecked, directionChecked, myKnowledge, myPlan } = data;
+    return new Promise((resolve, reject) => {
+        db.collection('users').add({
+            data: {
+                name: username,
+                phoneNumber: phone,
+                sex: gender,
+                recruitDirection: type,
+                class_select: gradeChecked,
+                major_select: majorChecked,
+                direction_select: directionChecked,
+                skill: myKnowledge,
+                plan: myPlan,
+            },
+            success: res => {
+                resolve(res);
+            },
+            fail: err => {
+                reject();
+            }
+        })
+    })
+}

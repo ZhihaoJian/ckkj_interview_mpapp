@@ -1,13 +1,16 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View } from '@tarojs/components';
-import Title from '../../components/Title';
+import Title from '../../components/Title/index';
+import Footer from '../../components/Footer/index'
 import './index.less';
 
-import AI_IMG from '../../assests/images/ai.png';
-import FE_IMG from '../../assests/images/fe.jpg';
-import BE_IMG from '../../assests/images/be.jpg';
-import BIG_DATA_IMG from '../../assests/images/big_data.jpg';
-import MOBILE_DEV_IMG from '../../assests/images/mobile_dev.jpg';
+import { AI_IMG, FE_IMG, BE_IMG, BIG_DATA_IMG, VR_IMG, MOBILE_DEV_IMG } from '../../mock/local_data';
+
+// import AI_IMG from '../../assests/images/ai.png';
+// import FE_IMG from '../../assests/images/fe.jpg';
+// import BE_IMG from '../../assests/images/be.jpg';
+// import BIG_DATA_IMG from '../../assests/images/big_data.jpg';
+// import MOBILE_DEV_IMG from '../../assests/images/mobile_dev.jpg';
 
 //根据点击的索引加载不同的banner
 function switchBanner(idx) {
@@ -25,7 +28,7 @@ function switchBanner(idx) {
         case '2':
             return {
                 banner: BIG_DATA_IMG,
-                detail: '大数据技术的战略意义不在于掌握庞大的数据信息，而在于对这些含有意义的数据进行专业化处理。换言之，如果把大数据比作一种产业，那么这种产业实现盈利的关键，在于提高对数据的“加工能力”，通过“加工”实现数据的“增值”。从技术上看，大数据与云计算的关系就像一枚硬币的正反面一样密不可分。大数据必然无法用单台的计算机进行处理，必须采用分布式架构。它的特色在于对海量数据进行分布式数据挖掘，但它必须依托云计算的分布式处理、分布式数据库和云存储、虚拟化技术。随着云时代的来临，大数据（Big'
+                detail: '大数据技术的战略意义不在于掌握庞大的数据信息，而在于对这些含有意义的数据进行专业化处理。换言之，如果把大数据比作一种产业，那么这种产业实现盈利的关键，在于提高对数据的“加工能力”，通过“加工”实现数据的“增值”。从技术上看，大数据与云计算的关系就像一枚硬币的正反面一样密不可分。大数据必然无法用单台的计算机进行处理，必须采用分布式架构。它的特色在于对海量数据进行分布式数据挖掘，但它必须依托云计算的分布式处理、分布式数据库和云存储、虚拟化技术。随着云时代的来临，大数据（Big data）也吸引了越来越多的关注。《著云台》的分析师团队认为，大数据（Big data）通常用来形容一个公司创造的大量非结构化数据和半结构化数据，这些数据在下载到关系型数据库用于分析时会花费过多时间和金钱。大数据分析常和云计算联系到一起，因为实时的大型数据集分析需要像MapReduce一样的框架来向数十、数百或甚至数千的电脑分配工作。大数据需要特殊的技术，以有效地处理大量的容忍经过时间内的数据。适用于大数据的技术，包括大规模并行处理（MPP）数据库、数据挖掘电网、分布式文件系统、分布式数据库、云计算平台、互联网和可扩展的存储系统。'
             }
         case '3':
             return {
@@ -34,7 +37,7 @@ function switchBanner(idx) {
             }
         case '4':
             return {
-                banner: '',
+                banner: VR_IMG,
                 detail: `
                 VR不是一项新技术，它只是变得可及。— Jeremy Bailenson(Stanford VHIL)
 
@@ -102,6 +105,7 @@ export default class Direction extends Component {
                         </View>
                     </View>
                 </View>
+                <Footer />
             </View>
         )
     }

@@ -4,11 +4,12 @@ import { AtTabBar } from 'taro-ui'
 import IndexPage from '../../components/IndexPage/index'
 import MePage from '../Me/index'
 import './index.less'
+import Footer from '../../components/Footer';
 
 export default class Index extends Component {
 
     config = {
-        navigationBarTitleText: '创客103网申小程序'
+        navigationBarTitleText: '创客103网申平台'
     }
 
     state = {
@@ -33,6 +34,7 @@ export default class Index extends Component {
                 {
                     current === 0 ? <IndexPage /> : <MePage />
                 }
+                <Footer />
                 <AtTabBar
                     fixed
                     tabList={tabList}

@@ -1,13 +1,26 @@
-import AllamMaalla from '../assests/avatar/Allam_Maalla.jpg';
-import LiShaoQiang from '../assests/avatar/li_shao_qiang.jpg';
-import HeWenHai from '../assests/avatar/he_wen_hai.jpg';
-import JiaChao from '../assests/avatar/jia_chao.jpg';
+// import AllamMaalla from '../assests/avatar/Allam_Maalla.jpg';
+// import LiShaoQiang from '../assests/avatar/li_shao_qiang.jpg';
+// import HeWenHai from '../assests/avatar/he_wen_hai.jpg';
+// import JiaChao from '../assests/avatar/jia_chao.jpg';
 
-import AI_IMG from '../assests/images/ai.png';
-import FE_IMG from '../assests/images/fe.jpg';
-import BE_IMG from '../assests/images/be.jpg';
-import BIG_DATA_IMG from '../assests/images/big_data.jpg';
-import MOBILE_DEV_IMG from '../assests/images/mobile_dev.jpg';
+const AllamMaalla = 'https://lg-1vfjv3uu-1257634410.cos.ap-shanghai.myqcloud.com/ckkj_interview/avatar/Allam_Maalla.jpg';
+const LiShaoQiang = 'https://lg-1vfjv3uu-1257634410.cos.ap-shanghai.myqcloud.com/ckkj_interview/avatar/li_shao_qiang.jpg';
+const JiaChao = 'https://lg-1vfjv3uu-1257634410.cos.ap-shanghai.myqcloud.com/ckkj_interview/avatar/jia_chao.jpg';
+const HeWenHai = 'https://lg-1vfjv3uu-1257634410.cos.ap-shanghai.myqcloud.com/ckkj_interview/avatar/he_wen_hai.jpg';
+
+export const AI_IMG = 'https://lg-1vfjv3uu-1257634410.cos.ap-shanghai.myqcloud.com/ckkj_interview/images/ai.jpg';
+export const FE_IMG = 'https://lg-1vfjv3uu-1257634410.cos.ap-shanghai.myqcloud.com/ckkj_interview/images/fe.jpg';
+export const BE_IMG = 'https://lg-1vfjv3uu-1257634410.cos.ap-shanghai.myqcloud.com/ckkj_interview/images/be.jpg';
+export const BIG_DATA_IMG = 'https://lg-1vfjv3uu-1257634410.cos.ap-shanghai.myqcloud.com/ckkj_interview/images/big_data.jpg';
+export const MOBILE_DEV_IMG = 'https://lg-1vfjv3uu-1257634410.cos.ap-shanghai.myqcloud.com/ckkj_interview/images/mobile_dev.jpg';
+export const VR_IMG = 'https://lg-1vfjv3uu-1257634410.cos.ap-shanghai.myqcloud.com/ckkj_interview/images/vr.jpg';
+
+// import AI_IMG from '../assests/images/ai.jpg';
+// import FE_IMG from '../assests/images/fe.jpg';
+// import BE_IMG from '../assests/images/be.jpg';
+// import VR_IMG from '../assests/images/vr.jpg';
+// import BIG_DATA_IMG from '../assests/images/big_data.jpg';
+// import MOBILE_DEV_IMG from '../assests/images/mobile_dev.jpg';
 
 export const teachers = [
     {
@@ -66,12 +79,12 @@ export const teachers = [
         tags: ['教研室主任', '获奖多多', '项目多多', '副教授'],
         project: [
             {
-                title: '2012.5',
-                content: ['广东省教育厅项目——《立体化教学模式下课程互动教学平台的开发与研究》2012.5  项目编号A16']
-            },
-            {
                 title: '2013.6',
                 content: ['广东省教育科研“十一五”规划研究项目《网络经济与知识经济环境下广东高校创新与创业教育平台功能研究》2013.6  项目编号2011TJK294']
+            },
+            {
+                title: '2012.5',
+                content: ['广东省教育厅项目——《立体化教学模式下课程互动教学平台的开发与研究》2012.5  项目编号A16']
             },
             {
                 title: '2011.5',
@@ -88,7 +101,7 @@ export const teachers = [
                 content: ['指导学生参加第五届全国大学生服务外包创新创业设计大赛全国三等奖']
             },
             {
-                title: '2013.6',
+                title: '2013.8',
                 content: ['指导学生参加第四届全国大学生服务外包创新创业设计大赛全国二等奖']
             },
             {
@@ -96,20 +109,20 @@ export const teachers = [
                 content: ['指导学生参加 2012年大学生创新创业训练计划项目 基于WIFI局域网“微办公”平台开发']
             },
             {
-                title: '2012.8',
-                content: ['指导学生参加第三届全国大学生服务外包创新应用大赛全国三等奖']
-            },
-            {
                 title: '2012.10',
                 content: ['指导学生参加第二十二届广东省“华资高校杯”软件作品设计竞赛（本科组）三等奖']
             },
             {
-                title: '2011.10',
-                content: ['指导学生参加第二十二届广东省“南天高校杯”软件作品设计竞赛（本科组）二等奖']
+                title: '2012.8',
+                content: ['指导学生参加第三届全国大学生服务外包创新应用大赛全国三等奖']
             },
             {
                 title: '2011.12',
                 content: ['学院“第一届优秀教案评比”活动 三等奖']
+            },
+            {
+                title: '2011.10',
+                content: ['指导学生参加第二十二届广东省“南天高校杯”软件作品设计竞赛（本科组）二等奖']
             }
         ]
     },
@@ -118,31 +131,31 @@ export const teachers = [
         note: '博士，教授，博士生导师',
         thumb: JiaChao,
         detail: `
-        贾超，博士，教授，博士生导师。
+        贾超，博士，教授，博士生导师。发表学术论文50余篇，多篇被EI、SCI检索，获得多项专利，多次获得省市科技进步奖，两项研究成果鉴定为国际先进。
         `,
         major: ['计算机视觉与图像处理', '虚拟现实与虚拟仿真'],
         tags: ['教授', '博士生导师', '计算机视觉', '虚拟现实与虚拟仿真', '大牛', '论文50+', '专利多多'],
         timeline: [
             {
-                title: '2002',
-                content: ['晋升副教授']
-            },
-            {
-                title: '2005',
-                content: ['博士毕业于燕山大学']
-            },
-            {
-                title: '2007',
-                content: ['晋升教授']
+                title: '2010',
+                content: ['被评为博士研究生导师']
             },
             {
                 title: '2009',
                 content: ['加拿大RYERSON大学，高级访问学者']
             },
             {
-                title: '2010',
-                content: ['被评为博士研究生导师']
-            }
+                title: '2007',
+                content: ['晋升教授']
+            },
+            {
+                title: '2005',
+                content: ['博士毕业于燕山大学']
+            },
+            {
+                title: '2002',
+                content: ['晋升副教授']
+            },
         ],
         project: [
             {
@@ -150,11 +163,13 @@ export const teachers = [
             },
             {
                 title: '河北省自然科学基金《重要构件内部缺陷的虚拟重构方法及应用基础研究》'
-            },
-            {
-                title: '发表学术论文50余篇，多篇被EI、SCI检索，获得多项专利，多次获得省市科技进步奖，两项研究成果鉴定为国际先进'
             }
+        ],
+        prizes: [
+            { title: '发表学术论文50余篇，多篇被EI、SCI检索，获得多项专利' },
+            { title: '多次获得省市科技进步奖，两项研究成果鉴定为国际先进' }
         ]
+
     },
     {
         title: '何文海',
@@ -190,7 +205,7 @@ export const swiperImgs = [
     BE_IMG,
     BIG_DATA_IMG,
     MOBILE_DEV_IMG,
-    //TODO:还有个VR没放
+    VR_IMG,
     AI_IMG
 ];
 

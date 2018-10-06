@@ -14,7 +14,7 @@ class App extends Component {
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: '创客103招新小程序',
+      navigationBarTitleText: '创客103网申平台',
       navigationBarTextStyle: 'black'
     }
   }

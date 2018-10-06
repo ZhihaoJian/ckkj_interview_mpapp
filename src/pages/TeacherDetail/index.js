@@ -1,8 +1,9 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Text } from '@tarojs/components'
-import { AtTag, AtTimeline, AtList, AtListItem } from 'taro-ui'
+import { AtTag, AtTimeline } from 'taro-ui'
 import Title from '../../components/Title';
 import { teachers } from '../../mock/local_data';
+import Footer from '../../components/Footer/index';
 import './index.less';
 
 export default class TeacherDetail extends Component {
@@ -86,6 +87,7 @@ export default class TeacherDetail extends Component {
                         }
                     </View>
                 </View>
+                <Footer/>
             </View>
         )
     }

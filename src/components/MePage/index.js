@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { Picker, View, Text } from '@tarojs/components'
 import { AtInput, AtTextarea, AtButton, AtRadio, AtToast } from 'taro-ui'
-import { getStorage, setStorage, hasNetWork } from '../../util/index'
+import { getStorage, setStorage, hasNetWork, connectToDB } from '../../util/index'
 import './index.less'
 import Title from '../Title';
 import NoticeBar from '../Notice';
@@ -62,6 +62,18 @@ function setToLocalData(data, disabled) {
     setStorage(INTERVIEW_INFO, JSON.stringify(data));
 }
 
+//检查表单是否合法
+//合法才能提交简历
+function isFormValidate(data) {
+    const { username, phone, gender, majorChecked, directionChecked, myKnowledge, myPlan, gradeChecked, type } = data;
+    if (!username || !phone || !myKnowledge || !myPlan) {
+        return false;
+    }
+    if (!(/^1[3|4|5|7|8]\d{9}$/.test(phone))) {
+        return false;
+    }
+    return true;
+}
 
 //简历编写
 export default class MePage extends Component {
@@ -92,17 +104,28 @@ export default class MePage extends Component {
     }
 
     componentDidMount() {
-        //获取历史简历信息，回填
-        //根据用户过去是否提交过简历判断是否禁止多次提交
-        getStorage(INTERVIEW_INFO).then(data => {
-            const newData = JSON.parse(data);
-            const obj = {};
-            for (let i = 0; i < newData.length; i++) {
-                const el = newData[i];
-                obj[el.key] = el.value;
-            }
-            this.setState({ ...obj })
-        })
+        if (this.isExpired()) {
+            this.setState({ disabled: true })
+        } else {
+            //获取历史简历信息，回填
+            //根据用户过去是否提交过简历判断是否禁止多次提交
+            getStorage(INTERVIEW_INFO).then(data => {
+                const newData = JSON.parse(data);
+                const obj = {};
+                for (let i = 0; i < newData.length; i++) {
+                    const el = newData[i];
+                    obj[el.key] = el.value;
+                }
+                this.setState({ ...obj })
+            })
+        }
+    }
+
+    //判断当前日期是否超过2018.10.10 中午12 点，过期的话，禁止提交简历
+    isExpired = () => {
+        const date = new Date();
+        const expire = new Date(2018, 10, 10, 12);
+        return date > expire;
     }
 
     //下面是各种表单绑定
@@ -121,8 +144,12 @@ export default class MePage extends Component {
     }
 
     handleMajorChange = (e) => {
-        const idx = e.detail.value;
-        const majorChecked = this.state.major[idx];
+        const selectedKeys = e.detail.value; // [1,1]
+        const majorsAndDirections = this.state.major;
+        const selectedMajor = majorsAndDirections[0][selectedKeys[0]];  //选中的学院
+        const selectedDirection = majorsAndDirections[1][selectedKeys[1]];//选中的专业
+
+        const majorChecked = `${selectedMajor}-${selectedDirection}`
         this.setState({ majorChecked })
     }
 
@@ -150,40 +177,46 @@ export default class MePage extends Component {
         this.setState({ type })
     }
 
+    //展示错误的toast
+    showErrorToast(title) {
+        const errorToast = this.state.errorToast;
+        errorToast.title = title;
+        this.setState({ errorToastShow: true, errorToast, loading: false }, () => {
+            setTimeout(() => {
+                this.setState({ errorToastShow: false })
+            }, 1200)
+        });
+    }
+
     handleSubmit = () => {
         this.setState({ loading: true })
-        //提交简历 记录用户的简历信息到本地缓存以便二次访问回填
-        setTimeout(() => {
-            //判断是否联网
-            hasNetWork().then(isConnect => {
-                let newData = formatData(this.state);
-                if (isConnect) {
-                    setToLocalData(newData, true);
-                    //TODO:发送ajax请求
-                    //设置应用状态
-                    this.setState({ loading: false, disabled: true, feedbackIsOpen: true });
-                } else {
-                    //保存用户填写数据到本地
+        //判断是否联网
+        hasNetWork().then(isConnect => {
+            let newData = formatData(this.state);
+            if (isConnect) {
+                //判断表单的必填项是否合法
+                if (!isFormValidate(this.state)) {
+                    this.showErrorToast('请认真填写每一项哦')
                     setToLocalData(newData, false);
-
-                    //提示用户尚未联网
-                    const errorToast = this.state.errorToast;
-                    errorToast.title = '尚未联网';
-                    //需要手动设置禁止erroToastShow为False，否则编辑时候会反复出现toast组件
-                    this.setState({ errorToastShow: true, errorToast, loading: false }, () => {
-                        setTimeout(() => {
-                            this.setState({ errorToastShow: false })
-                        }, 1200)
-                    });
+                    return;
                 }
-            })
-        }, 1500)
+                //提交简历 记录用户的简历信息到本地缓存以便二次访问回填
+                setToLocalData(newData, true);
+                //发送ajax请求
+                connectToDB(this.state);
+                //设置应用状态
+                this.setState({ loading: false, disabled: true, feedbackIsOpen: true });
+            } else {
+                //保存用户填写数据到本地
+                setToLocalData(newData, false);
+                this.showErrorToast('尚未连接网络');
+            }
+        })
+
     }
 
     render() {
-
         const { disabled } = this.state;
-
         return (
             <View className='interview-wrapper' >
                 <Title title='填写个人简历' />
@@ -195,7 +228,7 @@ export default class MePage extends Component {
                             title='姓名'
                             type='text'
                             disabled={disabled}
-                            placeholder='简智濠'
+                            placeholder='Riot'
                             value={this.state.username}
                             onChange={this.handleUserNameChange.bind(this)}
                         />
@@ -206,7 +239,7 @@ export default class MePage extends Component {
                             title='手机号码'
                             type='phone'
                             disabled={disabled}
-                            placeholder='156****3005'
+                            placeholder='15612343005'
                             value={this.state.phone}
                             onChange={this.handlePhoneChange.bind(this)}
                         />
