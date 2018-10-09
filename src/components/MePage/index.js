@@ -69,7 +69,7 @@ function isFormValidate(data) {
     if (!username || !phone || !myKnowledge || !myPlan) {
         return false;
     }
-    if (!(/^1[3|4|5|7|6|8]\d{9}$/.test(phone))) {
+    if (!(/^1[3|4|5|7|6|8|9]\d{9}$/.test(phone))) {
         return false;
     }
     return true;
@@ -82,8 +82,8 @@ const pickerColumn2 = {
     3: ['互联网金融','金融学','投资学'],
     4: ['市场营销专业', '物流管理', '电子商务', '国际经济与贸易'],
     5: ['软件工程', '计算机科学与技术', '信息管理与信息系统', '物联网工程', '智能科学与技术', '数据科学与大数据技术'],
-    6: [],
-    7: [],
+    6: ['其他'],
+    7: ['其他'],
     8: ['视觉传达设计', '数字媒体艺术', '产品设计', '环境设计'],
     9: ['电子商务及法律','法学']
 }
@@ -100,7 +100,7 @@ export default class MePage extends Component {
         gradeChecked: 2018,
         major: [
             ['旅游学院', '外国语学院', '金融学院', '电子商务管理学院', '会计学院', '信息技术与工程学院', '继续教育学院', '国际学院', '艺术设计学院', '法学院'],
-            ['旅游管理', '酒店管理', '电子商务及法律', '法学', '视觉传达设计', '数字媒体艺术', '产品设计', '环境设计', '软件工程', '计算机科学与技术', '信息管理与信息系统', '物联网工程', '智能科学与技术', '数据科学与大数据技术', '会计学', '财务管理', '审计学', '市场营销专业', '物流管理', '电子商务', '国际经济与贸易', '互联网金融', '金融学', '投资学', '英语', '日语', '德语', '商务英语', '其他']
+            ['旅游管理','酒店管理']
         ],
         majorChecked: '信息技术与工程学院 - 计算机科学与技术',
         direction: ['前端', '后端', '大数据', '人工智能', '移动开发', 'vr', '其他'],
@@ -153,7 +153,7 @@ export default class MePage extends Component {
         const selectedKeys = e.detail.value; // [1,1]
         const majorsAndDirections = this.state.major;
         const selectedMajor = majorsAndDirections[0][selectedKeys[0]];  //选中的学院
-        const selectedDirection = majorsAndDirections[1][selectedKeys[1]];//选中的专业
+        const selectedDirection = majorsAndDirections[1][selectedKeys[1]] || '其他';//选中的专业
 
         const majorChecked = `${selectedMajor}-${selectedDirection}`
         this.setState({ majorChecked })
@@ -239,7 +239,7 @@ export default class MePage extends Component {
             <View className='interview-wrapper' >
                 <Title title='填写个人简历' />
                 {
-                    !(isExpired()) ? (<NoticeBar marquee />) : (<NoticeBar title='报名已截止，欢迎大家的关注' />)
+                    !(isExpired()) ? (<NoticeBar marquee />) : (<NoticeBar title='报名已截止，感谢大家的关注' />)
                 }
                 
                 <View className='page' >

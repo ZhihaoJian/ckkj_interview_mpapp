@@ -128,7 +128,7 @@ export const connectToDB = (data) => {
             success: res => {
                 resolve(res);
             },
-            fail: err => {
+            fail: () => {
                 reject();
             }
         })

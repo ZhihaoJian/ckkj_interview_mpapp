@@ -26,7 +26,7 @@ export default class IndexPage extends Component {
 
                 {/* 通知 */}
                 {
-                    !(isExpired()) ? (<NoticeBar marquee />) : (<NoticeBar title='报名已截止，欢迎大家的关注' />)
+                    !(isExpired()) ? (<NoticeBar marquee />) : (<NoticeBar title='报名已截止，感谢大家的关注' />)
                 }
 
                 {/*轮播图*/}
